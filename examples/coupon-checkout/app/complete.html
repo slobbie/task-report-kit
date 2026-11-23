@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Order Complete | Demo Market</title><link rel="stylesheet" href="style.css"><script src="data.js"></script></head>
+<body><header><span class="logo">Demo Market</span><nav><a href="cart.html">Cart</a><a href="orders.html">Orders</a></nav></header>
+<main><div class="card done"><div class="check">✓</div><h1>Your order is complete</h1>
+<div style="max-width:320px;margin:18px auto 0;text-align:left">
+<div class="row"><span>Order number</span><span>20261123-0012</span></div>
+<div class="row"><span>Paid at</span><span>Nov 23, 12:08 AM</span></div>
+<div class="row"><span>Coupon discount</span><span class="discount" id="dis"></span></div>
+<div class="row total" id="paid"><span>Amount paid</span><span id="paidv"></span></div></div></div></main>
+<script>document.getElementById('dis').textContent='-'+won(discountOf(COUPON));document.getElementById('paidv').textContent=won(subtotal()-discountOf(COUPON));</script></body></html>

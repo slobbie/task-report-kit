@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cart | Demo Market</title><link rel="stylesheet" href="style.css"><script src="data.js"></script><script src="cart.js" defer></script></head>
+<body><header><span class="logo">Demo Market</span><nav><a href="cart.html">Cart</a><a href="orders.html">Orders</a></nav></header>
+<main><h1>Cart</h1>
+<div class="grid">
+  <section class="card" id="items"></section>
+  <aside class="card">
+    <div id="notice"></div>
+    <div class="coupon" id="coupon"></div>
+    <div style="margin-top:12px">
+      <div class="row"><span>Subtotal</span><span id="sub"></span></div>
+      <div class="row"><span>Coupon discount</span><span class="discount" id="dis"></span></div>
+      <div class="row total" id="totalRow"><span>Total</span><span id="total"></span></div>
+    </div>
+    <button class="btn" id="pay">Place Order</button>
+  </aside>
+</div></main></body></html>

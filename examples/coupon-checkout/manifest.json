@@ -1,0 +1,232 @@
+{
+ "lang": "en",
+ "title": "Coupon Checkout Report",
+ "heading": "Demo Market: coupon checkout before and after",
+ "platforms": [
+  {
+   "id": "desktop",
+   "name": "Desktop",
+   "wide": true,
+   "items": [
+    {
+     "id": "T1",
+     "title": "Coupon expiry at checkout",
+     "lead": "Members apply a coupon in the cart and pay with Place Order. Each coupon has an expiry time, shown under its name in the cart.",
+     "asis": [
+      {
+       "img": "shots/desktop/asis-01-cart.png",
+       "alt": "Cart with the expired WELCOME10 coupon shown as Applied",
+       "caption": "Cart (before)",
+       "marks": [
+        {
+         "n": 1,
+         "x": 59.58,
+         "y": 13.33,
+         "w": 21.67,
+         "h": 7.56,
+         "text": "Nothing checks the expiry again after the coupon is added. After WELCOME10 expires at 11:59 PM, the cart still shows it as Applied and keeps the $3.70 discount in the total."
+        }
+       ]
+      },
+      {
+       "img": "shots/desktop/asis-02-after-pay.png",
+       "alt": "Order complete page showing a $3.70 coupon discount",
+       "caption": "After Place Order (before)",
+       "marks": [
+        {
+         "n": 2,
+         "x": 38.61,
+         "y": 34.44,
+         "w": 22.78,
+         "h": 5.33,
+         "text": "Place Order completes the payment with the discount. The order is paid at 12:08 AM, after the coupon expired, so the store accepts an order discounted by a coupon that had already ended."
+        }
+       ]
+      }
+     ],
+     "tobe": [
+      {
+       "img": "shots/desktop/tobe-02-after-pay.png",
+       "alt": "Cart showing a coupon expired message and a $37.00 total",
+       "caption": "After Place Order (after)",
+       "marks": [
+        {
+         "n": 1,
+         "x": 59.58,
+         "y": 13.33,
+         "w": 21.67,
+         "h": 9.22,
+         "text": "Place Order re-checks the expiry first. The expired coupon is removed and a message explains why, so an expired coupon no longer stays applied (①)."
+        },
+        {
+         "n": 2,
+         "x": 59.58,
+         "y": 36.56,
+         "w": 21.67,
+         "h": 5.33,
+         "text": "The total returns to $37.00 before the order is placed, so orders discounted by an expired coupon no longer go through (②)."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "T2",
+     "title": "Coupon in order history",
+     "lead": "Orders lists each order's date, order number, items, and amount paid.",
+     "asis": [
+      {
+       "img": "shots/desktop/asis-03-orders.png",
+       "alt": "Orders list without coupon details",
+       "caption": "Orders (before)",
+       "marks": [
+        {
+         "n": 1,
+         "x": 18.75,
+         "y": 13.33,
+         "w": 62.5,
+         "h": 13,
+         "text": "The order paid with WELCOME10 shows only the amount paid. Members cannot tell from Orders which coupon was used or how much it took off."
+        }
+       ]
+      }
+     ],
+     "tobe": [
+      {
+       "img": "shots/desktop/tobe-03-orders.png",
+       "alt": "Orders list showing the WELCOME10 coupon and its discount",
+       "caption": "Orders (after)",
+       "marks": [
+        {
+         "n": 1,
+         "x": 18.75,
+         "y": 13.33,
+         "w": 62.5,
+         "h": 15.22,
+         "text": "Each order shows the coupon used and its discount, so members can check coupon use right in Orders (①)."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mobile",
+   "name": "Mobile",
+   "items": [
+    {
+     "id": "T1",
+     "title": "Coupon expiry at checkout",
+     "lead": "Members apply a coupon in the cart and pay with Place Order. Each coupon has an expiry time, shown under its name in the cart.",
+     "asis": [
+      {
+       "img": "shots/mobile/asis-01-cart.png",
+       "alt": "Cart with the expired WELCOME10 coupon shown as Applied",
+       "caption": "Cart (before)",
+       "marks": [
+        {
+         "n": 1,
+         "x": 7.69,
+         "y": 34.95,
+         "w": 84.62,
+         "h": 8.06,
+         "text": "Nothing checks the expiry again after the coupon is added. After WELCOME10 expires at 11:59 PM, the cart still shows it as Applied and keeps the $3.70 discount in the total."
+        }
+       ]
+      },
+      {
+       "img": "shots/mobile/asis-02-after-pay.png",
+       "alt": "Order complete page showing a $3.70 coupon discount",
+       "caption": "After Place Order (before)",
+       "marks": [
+        {
+         "n": 2,
+         "x": 7.95,
+         "y": 36.73,
+         "w": 84.1,
+         "h": 5.69,
+         "text": "Place Order completes the payment with the discount. The order is paid at 12:08 AM, after the coupon expired, so the store accepts an order discounted by a coupon that had already ended."
+        }
+       ]
+      }
+     ],
+     "tobe": [
+      {
+       "img": "shots/mobile/tobe-02-after-pay.png",
+       "alt": "Cart showing a coupon expired message and a $37.00 total",
+       "caption": "After Place Order (after)",
+       "marks": [
+        {
+         "n": 1,
+         "x": 7.69,
+         "y": 34.95,
+         "w": 84.62,
+         "h": 9.83,
+         "text": "Place Order re-checks the expiry first. The expired coupon is removed and a message explains why, so an expired coupon no longer stays applied (①)."
+        },
+        {
+         "n": 2,
+         "x": 7.69,
+         "y": 59.72,
+         "w": 84.62,
+         "h": 5.69,
+         "text": "The total returns to $37.00 before the order is placed, so orders discounted by an expired coupon no longer go through (②)."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "T2",
+     "title": "Coupon in order history",
+     "lead": "Orders lists each order's date, order number, items, and amount paid.",
+     "asis": [
+      {
+       "img": "shots/mobile/asis-03-orders.png",
+       "alt": "Orders list without coupon details",
+       "caption": "Orders (before)",
+       "marks": [
+        {
+         "n": 1,
+         "x": 7.69,
+         "y": 14.22,
+         "w": 84.62,
+         "h": 13.86,
+         "text": "The order paid with WELCOME10 shows only the amount paid. Members cannot tell from Orders which coupon was used or how much it took off."
+        }
+       ]
+      }
+     ],
+     "tobe": [
+      {
+       "img": "shots/mobile/tobe-03-orders.png",
+       "alt": "Orders list showing the WELCOME10 coupon and its discount",
+       "caption": "Orders (after)",
+       "marks": [
+        {
+         "n": 1,
+         "x": 7.69,
+         "y": 14.22,
+         "w": 84.62,
+         "h": 16.23,
+         "text": "Each order shows the coupon used and its discount, so members can check coupon use right in Orders (①)."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "id": "basis",
+   "title": "Changed files",
+   "items": [
+    "app/cart.js: re-checks the coupon expiry in the Place Order handler.",
+    "app/orders.js: shows the coupon name and discount for each order."
+   ]
+  }
+ ]
+}

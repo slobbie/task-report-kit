@@ -1,0 +1,138 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* 레이아웃: 한 칼럼 문서. 항목마다 AS-IS / TO-BE 두 칸 비교, 좁은 화면에서는 위아래로 쌓음 */
+  :root {
+    --bg: #f5f6f4;
+    --surface: #ffffff;
+    --fg: #1b211d;
+    --muted: #5a645d;
+    --line: #dde2dc;
+    --accent: #138a4a;
+    --asis: #8a5a14;
+    --asis-bg: #fbf1e3;
+    --tobe-bg: #e5f4ea;
+    --warn: #a3410f;
+    --warn-bg: #fdece2;
+    --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121613; --surface: #1a201c; --fg: #e5ebe6; --muted: #9aa69d; --line: #2c352f;
+      --accent: #4fc583; --asis: #e2a95a; --asis-bg: #2b2217; --tobe-bg: #17291f;
+      --warn: #f0965f; --warn-bg: #2e1d14; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121613; --surface: #1a201c; --fg: #e5ebe6; --muted: #9aa69d; --line: #2c352f;
+    --accent: #4fc583; --asis: #e2a95a; --asis-bg: #2b2217; --tobe-bg: #17291f;
+    --warn: #f0965f; --warn-bg: #2e1d14; color-scheme: dark;
+  }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: var(--font-body); font-size: 15px; line-height: 1.7;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 40px 64px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+  h1 { font-size: 26px; line-height: 1.35; margin: 0; text-wrap: balance; }
+  h2 { font-size: 19px; margin: 0; text-wrap: balance; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  h3 { font-size: 15px; margin: 0; }
+  p { margin: 0; }
+  code { font-family: var(--font-mono); font-size: 0.86em; background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; word-break: break-all; }
+  .muted { color: var(--muted); }
+  .meta { margin-top: 12px; display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; font-size: 14px; }
+  .meta dt { color: var(--muted); }
+  .meta dd { margin: 0; min-width: 0; }
+
+  .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 560px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  th { font-weight: 500; color: var(--muted); font-size: 13px; }
+  .id { font-family: var(--font-mono); font-size: 13px; color: var(--accent); white-space: nowrap; }
+  .pill { display: inline-block; font-size: 12px; font-weight: 500; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+  .pill.ok { background: var(--tobe-bg); color: var(--accent); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn); }
+
+  section.item { display: flex; flex-direction: column; gap: 14px; }
+  .lead { color: var(--muted); }
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .col { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .tag { font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 4px; align-self: flex-start; }
+  .tag.asis { background: var(--asis-bg); color: var(--asis); }
+  .tag.tobe { background: var(--tobe-bg); color: var(--accent); }
+  figure { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+  figure img { display: block; width: 100%; max-width: 300px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+  section.item.wide figure img { max-width: 100%; }
+  .shot { position: relative; width: 100%; max-width: 300px; }
+  .shot img { max-width: 100%; }
+  section.item.wide .shot { max-width: 100%; }
+  .mark { position: absolute; border: 2px solid #ff5a36; border-radius: 6px; box-shadow: 0 0 0 2px rgba(255,255,255,0.7); }
+  .badge { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%;
+    background: #ff5a36; color: #fff; font-size: 12px; font-weight: 700; line-height: 1; flex-shrink: 0; }
+  .mark .badge { position: absolute; top: -12px; left: -12px; }
+  .mark-notes { list-style: none; padding: 0; margin: 2px 0 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+  .mark-notes li { display: flex; gap: 8px; align-items: flex-start; }
+  figcaption { font-size: 13px; color: var(--muted); }
+  ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+  .col ul { font-size: 14px; }
+
+  .note { background: var(--warn-bg); border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
+  .note h3 { color: var(--warn); }
+  h2.platform { font-size: 22px; padding-bottom: 8px; border-bottom: 2px solid var(--fg); margin-bottom: -16px; }
+  .basis { font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; }
+
+  header.top { max-width: 1140px; margin: 0 auto 32px; }
+  .layout { display: flex; gap: 32px; max-width: 1140px; margin: 0 auto; align-items: flex-start; }
+  .layout .wrap { flex: 1; min-width: 0; margin: 0; }
+  html { scroll-behavior: smooth; }
+  [id] { scroll-margin-top: 16px; }
+  .side { position: sticky; top: 24px; width: 230px; flex-shrink: 0; display: flex; flex-direction: column; gap: 2px; max-height: calc(100vh - 48px); overflow-y: auto; }
+  .side .nav-group { font-size: 13px; font-weight: 700; color: var(--fg); margin: 14px 0 4px; padding-left: 10px; }
+  .side .nav-group:first-child { margin-top: 0; }
+  .side a { display: flex; flex-direction: column; gap: 0; padding: 6px 10px; border-radius: 6px; color: var(--fg); text-decoration: none; font-size: 13px; line-height: 1.45; border-left: 2px solid transparent; }
+  .side a:hover { background: var(--surface); }
+  .side a.on { background: var(--surface); border-left-color: var(--accent); }
+  .side a .id { font-size: 12px; }
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; gap: 20px; }
+    .side { position: static; width: 100%; max-height: none; flex-direction: row; flex-wrap: wrap; gap: 6px; }
+    .side .nav-group { width: 100%; margin: 6px 0 0; padding-left: 0; }
+    .side a { border: 1px solid var(--line); border-left-width: 1px; background: var(--surface); }
+  }
+  @media (max-width: 620px) {
+    .compare { grid-template-columns: 1fr; }
+    h1 { font-size: 22px; }
+  }
+</style>
+<header class="top">
+  <h1>{{HEADING}}</h1>
+</header>
+<div class="layout">
+  <nav class="side" aria-label="{{NAV_LABEL}}">
+{{NAV}}
+  </nav>
+<div class="wrap">
+{{BODY}}
+</div>
+</div>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.side a'));
+  links.forEach(function(a){a.addEventListener('click',function(e){var el=document.getElementById(a.getAttribute('href').slice(1)); if(!el) return; e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); links.forEach(function(x){x.classList.remove('on');}); a.classList.add('on');});});
+  var map={}; links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ links.forEach(function(a){a.classList.remove('on');}); var a=map[e.target.id]; if(a) a.classList.add('on'); } });
+  },{rootMargin:'0px 0px -70% 0px'});
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id); if(el) io.observe(el);});
+})();
+</script>

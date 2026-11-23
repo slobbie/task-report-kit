@@ -1,0 +1,4 @@
+interface:
+  display_name: "태스크 AS-IS/TO-BE 검증"
+  short_description: "태스크를 구현하고 수정 전후 실제 화면을 캡처해 AS-IS/TO-BE HTML 보고서로 보고합니다."
+  default_prompt: "Use $task-asis-tobe."
