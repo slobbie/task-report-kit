@@ -1,6 +1,6 @@
 # 화면 캡처 순서와 운영 환경 사용 기준
 
-`task-asis-tobe`와 `task-plan`이 함께 따른다.
+`task-asis`, `task-asis-tobe`, `task-tobe`가 함께 따른다.
 
 ## 결과물은 항상 HTML 보고서다
 

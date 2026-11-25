@@ -12,10 +12,11 @@ The image above shows the first item of the example report in [examples/coupon-c
 
 | Skill | When | Output |
 | --- | --- | --- |
-| `task-plan` | Before starting work, given specs, policies, Figma, or improvement requests | A review report: current screenshots with numbered problems (AS-IS), matching numbered changes and reasons (TO-BE), and a task list |
+| `task-asis` | Before starting work, to find the problems in the current screens from specs, policies, Figma, or improvement requests | A review report: current screenshots with numbered problems (AS-IS), matching numbered changes and reasons (TO-BE), and a task list |
 | `task-asis-tobe` | While implementing a task, or when verifying work already done | A result report pairing before/after screenshots with numbered changes and the problems they solve |
+| `task-tobe` | When building a new screen, or reporting only the result without a before state | A TO-BE-only report: result screenshots with numbered markers and what each does |
 
-Both skills share the report builder and writing guides, so install them together.
+All three skills share the report builder and writing guides in `task-asis-tobe`, so install them together. `task-plan` was renamed to `task-asis`; if you installed an earlier version, remove the `task-plan` folder and reinstall.
 
 ## What it does
 
@@ -33,7 +34,7 @@ Both skills share the report builder and writing guides, so install them togethe
 npx skills add slobbie/task-report-kit
 ```
 
-Select both skills, then choose Codex, Claude Code, or both. Add `-g` to install for the current user.
+Select all three skills, then choose Codex, Claude Code, or both. Add `-g` to install for the current user.
 
 ### Install script (macOS, Linux)
 
@@ -60,14 +61,18 @@ The mobile workflow was verified on React Native (Expo dev build). Other stacks 
 
 ## Usage
 
-Claude Code: `/task-plan`, `/task-asis-tobe`. Codex: `$task-plan`, `$task-asis-tobe`.
+Claude Code: `/task-asis`, `/task-asis-tobe`, `/task-tobe`. Codex: `$task-asis`, `$task-asis-tobe`, `$task-tobe`.
 
 ```text
-/task-plan Review the attached spec and Figma link before redesigning the sign-up screen.
+/task-asis Find the current problems on the sign-up screen using the attached spec and Figma link.
 ```
 
 ```text
 /task-asis-tobe Add a "Forgot password" link to the login screen and report before/after screens on iOS and Android.
+```
+
+```text
+/task-tobe Build a new order confirmation screen and report the result screens.
 ```
 
 ## License

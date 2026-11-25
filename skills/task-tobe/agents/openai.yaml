@@ -1,0 +1,4 @@
+interface:
+  display_name: "태스크 TO-BE 보고"
+  short_description: "태스크를 구현하고 결과 화면만 실제로 캡처해 TO-BE HTML 보고서로 보고합니다."
+  default_prompt: "Use $task-tobe."

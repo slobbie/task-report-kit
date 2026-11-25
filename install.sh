@@ -11,7 +11,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
-SKILLS=(task-asis-tobe task-plan)
+SKILLS=(task-asis-tobe task-asis task-tobe)
 MODE=copy
 TARGETS=()
 
@@ -46,4 +46,4 @@ for dir in "${TARGETS[@]}"; do
   fi
 done
 
-echo "완료. 새 세션을 열면 Claude Code는 /task-plan, /task-asis-tobe, Codex는 \$task-plan, \$task-asis-tobe 로 부를 수 있습니다."
+echo "완료. 새 세션을 열면 Claude Code는 /task-asis, /task-asis-tobe, /task-tobe, Codex는 \$task-asis, \$task-asis-tobe, \$task-tobe 로 부를 수 있습니다."

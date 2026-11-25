@@ -1,6 +1,6 @@
 # AS-IS / TO-BE 항목 작성법
 
-`task-asis-tobe`와 `task-plan`이 함께 따른다. 독자가 AS-IS만 읽고 무엇이 문제인지, TO-BE만 읽고 왜 바꾸는지 알 수 있어야 한다.
+`task-asis`, `task-asis-tobe`, `task-tobe`가 함께 따른다. 독자가 AS-IS만 읽고 무엇이 문제인지, TO-BE만 읽고 왜 바꾸는지 알 수 있어야 한다.
 
 ## AS-IS: 문제를 쓴다
 

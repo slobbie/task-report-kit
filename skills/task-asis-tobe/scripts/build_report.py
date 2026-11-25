@@ -10,7 +10,7 @@ manifest.json 형식 (경로는 manifest 파일 기준 상대경로 또는 절�
   "heading": "본문 H1 제목",
   "lang": "ko",                 # 생략 가능. "en"이면 화면 고정 문구(플랫폼, 정리, 목록)를 영어로 쓴다
   "labels": {"asis": "AS-IS", "tobe": "TO-BE"},   # 생략 가능 (칸 이름을 바꿀 때만)
-  "notes": [                    # 생략 가능. 항목 뒤에 붙는 정리 상자 (task-plan의 태스크 목록, 자료끼리 다른 곳 등)
+  "notes": [                    # 생략 가능. 항목 뒤에 붙는 정리 상자 (task-asis의 태스크 목록, 자료끼리 다른 곳 등)
     {"id": "tasks", "title": "태스크 목록", "items": ["문장", "문장"]}
   ],
   "merge": true,                # 생략 가능. 플랫폼들의 항목 id 순서가 같으면 자동으로 true:
@@ -32,7 +32,8 @@ manifest.json 형식 (경로는 manifest 파일 기준 상대경로 또는 절�
                      "marks": [ {"n": 1, "x": 8, "y": 17, "w": 84, "h": 6, "text": "번호 설명"} ]
                      # 또는 web_capture.mjs가 저장한 좌표 파일 경로: "marks": "shots/desktop/asis-01.marks.json"
                    } ],
-          "tobe": [ {"text": "해당 화면 없음."} ]
+          "tobe": [ {"img": "shots/ios/tobe-01.png", "alt": "...", "caption": "..."} ]
+          # asis를 빼면 TO-BE 한 칸으로 그린다 (새 화면, 결과만 보고할 때. task-tobe)
         }
       ]
     }
@@ -113,6 +114,15 @@ def figure(entry, base):
     notes_html = f'<ol class="mark-notes">{notes}</ol>' if notes else ''
     return (f'<figure><div class="shot"><img src="data:{mime};base64,{b64}" alt="{alt}">{boxes}</div>'
             f'<figcaption>{cap}</figcaption>{notes_html}</figure>')
+
+
+def tags_of(item):
+    """asis가 없거나 비어 있는 항목은 TO-BE 한 칸만 그린다."""
+    return ('asis', 'tobe') if item.get('asis') else ('tobe',)
+
+
+def compare_cls(tags):
+    return 'compare' if len(tags) == 2 else 'compare single'
 
 
 def column(tag, entries, base, labels):
@@ -204,7 +214,8 @@ def main():
             lead = per_platform([(pid, it['lead']) for pid, it in items],
                                 lambda v: f'<p class="lead">{html.escape(v)}</p>')
             cols = ''
-            for tag in ('asis', 'tobe'):
+            tags = tags_of(it0)
+            for tag in tags:
                 label = html.escape(labels.get(tag, 'AS-IS' if tag == 'asis' else 'TO-BE'))
                 inner = per_platform([(pid, it[tag]) for pid, it in items],
                                      lambda entries: ''.join(fig(e) for e in entries))
@@ -212,7 +223,7 @@ def main():
             body.append(
                 f'<section class="item{" wide" if wide else ""}" id="{anchor}">'
                 f'<h2><span class="id">{html.escape(it0["id"])}</span>{html.escape(it0["title"])}</h2>'
-                f'{lead}<div class="compare">{cols}</div></section>')
+                f'{lead}<div class="{compare_cls(tags)}">{cols}</div></section>')
         rules = '\n'.join(f'  :root[data-pf="{pid}"] .pf:not([data-platform="{pid}"]) {{ display: none; }}'
                           for pid in ids)
         rules += f'\n  :root:not([data-pf]) .pf:not([data-platform="{ids[0]}"]) {{ display: none; }}'
@@ -231,8 +242,9 @@ def main():
                     f'<section class="item{" wide" if p.get("wide") else ""}" id="{anchor}">'
                     f'<h2><span class="id">{html.escape(it["id"])}</span>{html.escape(it["title"])}</h2>'
                     f'<p class="lead">{html.escape(it["lead"])}</p>'
-                    f'<div class="compare">{column("asis", it["asis"], base, labels)}'
-                    f'{column("tobe", it["tobe"], base, labels)}</div></section>')
+                    f'<div class="{compare_cls(tags_of(it))}">'
+                    + ''.join(column(t, it[t], base, labels) for t in tags_of(it))
+                    + '</div></section>')
 
     for n in m.get('notes', []):
         nid = n.get('id', 'note')
